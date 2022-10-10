@@ -41,21 +41,6 @@ const sectionCreator = () => {
 
 
 /**
- * to observe the active section 
- * i used the window property onscroll
- * and used getBoundingClintRect function to know which section user in it 
-*/
-window.onscroll = function() {
-    document.querySelectorAll("section").forEach(function(active) {
-        if (active.getBoundingClientRect().top >= -400 &&
-         active.getBoundingClientRect().top <= 150){
-            active.classList.add("your-active-class");
-        }else{
-            active.classList.remove("your-active-class");
-        }
-    });
-}
-/**
  * I added Event listener to make the smoothy scrolling to target section
  * and added setTimeout to be realese to eyes in scrolling 
 */
@@ -105,4 +90,26 @@ mybutton.addEventListener("click", backToTop);
 function backToTop() {
   document.body.scrollTop = 0;
   document.documentElement.scrollTop = 0;
-}
+};
+
+/**
+ * to observe the active section 
+ * i used the window property onscroll
+ * and used getBoundingClintRect function to know which section user in it 
+ * add active class to navbar
+*/
+window.onscroll = function() {
+	document.querySelectorAll("section").forEach(function(active) {
+    let activeLink = navBarList.querySelector(`[data-nav=${active.id}]`);
+	if(active.getBoundingClientRect().top >= -400 &&
+    active.getBoundingClientRect().top <= 150){
+
+    active.classList.add("your-active-class");
+    activeLink.classList.add("active");
+
+  }else{
+         active.classList.remove("your-active-class");
+         activeLink.classList.remove("active");
+    }
+	});
+};
